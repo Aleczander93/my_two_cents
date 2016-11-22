@@ -23,7 +23,7 @@ router.get('/posts/:id', function(req, res){
       });
     }
     return res.status(200).json({
-      posts:posts
+      post:post
     });
   });
 });
@@ -32,7 +32,7 @@ router.post('/posts', function(req, res){
   console.log(req.body);
   var post = new Post(req.body);
   post.postDate = new Date();
-  post.summary = req.body.body.splice(0,100) + '...';
+  post.summary = req.body.body.slice(0, 100) + '...';
   post.save(function(err){
     if(err){
       return res.status(500).json({
@@ -45,9 +45,31 @@ router.post('/posts', function(req, res){
   });
 });
 
-router.put('/posts/:id', function(req, res){});
+router.put('/posts/:id', function(req, res){
+  Post.findOneAndUpdate({_id: req.params.id}, req.body, function(err, oldPost){
+    if(err){
+      return res.status(500).json({
+        err:err
+      });
+    }
+    return res.status(200).json({
+      msg:oldPost
+    });
+  });
+});
 
-router.delete('/posts/:id', function(req, res){});
+router.delete('/posts/:id', function(req, res){
+  Post.findOneAndRemove({_id:req.params.id}, function(err, deletedPost){
+    if(err){
+    return  res.status(500).json({
+        err:err
+      });
+    }
+    return res.status(200).json({
+      msg: deletedPost
+    });
+  });
+});
 
 
 module.exports = router;

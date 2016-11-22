@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
-  tite: {
+  title: {
     type: String,
     required: true
   },
@@ -19,7 +19,7 @@ var postSchema = new Schema({
   },
   postDate: {
     type: Date,
-    Required: true
+    required: true
   },
   summary: {
     type:String,
