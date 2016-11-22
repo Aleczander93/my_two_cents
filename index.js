@@ -8,14 +8,15 @@ var port = process.env.PORT || 8080;
 var mongoURI = process.env.mongoURI || require('./config.js').mongoURI;
 
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({extended:true}));
+server.use(bodyParser.urlencoded({extended: true}));
+server.use(express.static(__dirname + "/public"));
 
 mongoose.connect(mongoURI);
 
 server.use(postRouter);
 
 server.get('/', function(req, res){
-  res.send('I am working!');
+  res.sendFile('public/html/index.html', {root: __dirname});
 });
 
 server.listen(port, function(){
