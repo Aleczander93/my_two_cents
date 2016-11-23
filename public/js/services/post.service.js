@@ -7,14 +7,21 @@
   function PostService($http){
     var posts = [];
     var baseUrl = '/posts/';
+    var selectedPost;
     init();
     return{
       getAll: getAll,
       getOne: getOne,
       create: create,
       update: update,
-      delete: deletePost
+      delete: deletePost,
+      getSelectedPost:getSelectedPost
     };
+
+
+function getSelectedPost(){
+  return selectedPost;
+}
 
 function init(){
   $http.get(baseUrl)
@@ -30,7 +37,15 @@ function getAll(){
   return posts;
 }
 
-function getOne(id){}
+function getOne(id){
+  $http.get(baseUrl + id)
+  .then(function(response){
+    selectedPost= response.data.post[0]; //forewarn if the get returns in an empty array it will cause an error
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+}
 
 function create (newPost){
   $http.post(baseUrl, newPost)
@@ -42,7 +57,15 @@ function create (newPost){
   });
 }
 
-function update (id, newPostData){}
+function update(id, newPostData){
+  $http.put(baseUrl + id, newPostData)
+  .then(function(response){
+    init();
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+}
 
 function deletePost (id){
   $http.delete(baseUrl + id)
