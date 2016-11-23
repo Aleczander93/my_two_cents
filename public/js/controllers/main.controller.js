@@ -7,6 +7,7 @@
     function MainController($scope, PostService){
       $scope.post = PostService.getAll();
       $scope.create = create;
+      $scope.delete = deleteOne;
 
       $scope.$watch(function(){
         return PostService.getAll();
@@ -18,5 +19,10 @@
           PostService.create(newPost);
           $scope.newPost = {};
       }
+
+      function deleteOne(id){
+        PostService.delete(id);
+        $scope.deleteId = '';
     }
+  }
 }());

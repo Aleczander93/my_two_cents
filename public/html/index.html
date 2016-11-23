@@ -12,6 +12,9 @@
     <input type="text" ng-model='newPost.title' placeholder="Title">
     <textarea rows="8" cols="80" ng-model='newPost.body'></textarea>
     <button class='btn btn-default' ng-click='create(newPost)'>Create</button>
+    <hr>
+    <input type="text" ng-model='deleteId' placeholder="id">
+    <button class='btn btn-danger' type="button" ng-click='delete(deleteId)'>&times</button>
     <pre>
       {{posts | json}}
     </pre>

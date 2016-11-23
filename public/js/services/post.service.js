@@ -13,7 +13,7 @@
       getOne: getOne,
       create: create,
       update: update,
-      delete: deleteOne
+      delete: deletePost
     };
 
 function init(){
@@ -44,7 +44,15 @@ function create (newPost){
 
 function update (id, newPostData){}
 
-function deleteOne (id){}
+function deletePost (id){
+  $http.delete(baseUrl + id)
+  .then(function(){
+    init();
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+}
 
   }
 
