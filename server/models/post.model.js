@@ -6,7 +6,7 @@ var postSchema = new Schema({
     type: String,
     required: true
   },
-  cover:{
+  cover: {
     type: String
   },
   body: {
@@ -22,10 +22,11 @@ var postSchema = new Schema({
     required: true
   },
   summary: {
-    type:String,
-    required:true
+    type: String,
+    required: true
   }
 });
+
 
 var Post = mongoose.model('Post', postSchema);
 module.exports = Post;

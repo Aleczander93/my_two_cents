@@ -29,7 +29,6 @@ router.get('/posts/:id', function(req, res){
 });
 
 router.post('/posts', function(req, res){
-  console.log(req.body);
   var post = new Post(req.body);
   post.postDate = new Date();
   post.summary = req.body.body.slice(0, 100) + '...';
@@ -44,7 +43,6 @@ router.post('/posts', function(req, res){
     });
   });
 });
-
 router.put('/posts/:id', function(req, res){
   Post.findOneAndUpdate({_id: req.params.id}, req.body, function(err, oldPost){
     if(err){
@@ -59,11 +57,11 @@ router.put('/posts/:id', function(req, res){
 });
 
 router.delete('/posts/:id', function(req, res){
-  Post.findOneAndRemove({_id:req.params.id}, function(err, deletedPost){
+  Post.findOneAndRemove({_id: req.params.id}, function(err, deletedPost){
     if(err){
-    return  res.status(500).json({
-        err:err
-      });
+      return res.status(500).json({
+        msg: err
+      })
     }
     return res.status(200).json({
       msg: deletedPost
