@@ -43,7 +43,7 @@ userSchema.methods.generateJwt = function(){
   return jwt.sign({
     _id:this._id,
     email: this.email,
-    exp: pasrInt(expiration.getTime() / 1000)
+    exp: parseInt(expiration.getTime() / 1000)
   }, signature);
 };
 

@@ -56,7 +56,7 @@ router.put('/posts/:id', function(req, res){
     return res.status(200).json({
       msg:oldPost
     });
-  })
+  });
 });
 
 router.delete('/posts/:id', function(req, res){
